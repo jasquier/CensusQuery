@@ -23,7 +23,6 @@ public class CensusResponse {
     private Options options;
 
     public CensusResponse(Options options) {
-        frontEndResponse = new HashMap<>();
         this.options = options;
     }
 
@@ -38,6 +37,7 @@ public class CensusResponse {
 
     public void setResponse(ArrayNode response) {
         this.response = response;
+        frontEndResponse = new HashMap<>(); // clear the map
     }
 
     private void buildFrontEndResponseFromCensusResponse() {
@@ -48,15 +48,19 @@ public class CensusResponse {
         }
 
         for ( int i = 0; i < body.length; i++ ) {
+            // add state name to map
             String state = header.get(header.size() - 1).asText();
-            String stateNum = body[i].get(body.length).asText();
+            String stateNum = body[i].get(body[i].size() - 1).asText();
             int stateNumStringAsInt = Integer.parseInt(stateNum);
             frontEndResponse.put(state, USStates.values()[stateNumStringAsInt].toString());
 
-            String option = header.get(0).asText();
-            String optionInReadableForm = options.getAvailableOptions().get(option);
-            String optionValue = body[i].get(0).asText(); // this is hardcoded!
-            frontEndResponse.put(optionInReadableForm, optionValue);
+            // add options in readable form to map
+            for ( int j = 0; j < body[i].size()-1; j++ ) {
+                String option = header.get(j).asText();
+                String optionInReadableForm = options.getAvailableOptions().get(option);
+                String optionValue = body[i].get(j).asText();
+                frontEndResponse.put(optionInReadableForm, optionValue);
+            }
         }
     }
 }

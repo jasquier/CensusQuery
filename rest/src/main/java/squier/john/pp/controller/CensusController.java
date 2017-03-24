@@ -43,6 +43,9 @@ public class CensusController {
         ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options), HttpMethod.GET, null,
                 new ParameterizedTypeReference<ArrayNode>(){});
 
+        System.out.println("BODY");//////////////////////////////////////////////////////////////////////
+        System.out.println(response.getBody());//////////////////////////////////////////////////////////////////////
+
         censusResponse.setResponse(response.getBody());
         return censusResponse.getFrontEndResponse();
     }

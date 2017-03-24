@@ -38,7 +38,7 @@ public class CensusResponseSpec {
         header.add("state");
 
         body = new ArrayNode(factory);
-        body.add("30428");
+        body.add("3635");
         body.add("10");
 
         children = new ArrayList<>();
@@ -61,15 +61,45 @@ public class CensusResponseSpec {
     }
 
     @Test
-    public void buildFrontEndResponseFromCensusResponseTest() {
+    public void buildFrontEndResponseFromCensusResponseTestOne() {
         censusResponse.setResponse(input);
         Map<String, String> expected = new HashMap<>();
         expected.put("state", "DELAWARE");
-        expected.put("whiteMale29", "30428");
+        expected.put("whiteMale29", "3635");
 
         Map<String, String> actual = censusResponse.getFrontEndResponse();
 
         assertEquals("I expect the Map returned from getFrontEndResponse() to be equal to expected",
                 expected, actual);
+    }
+
+    @Test
+    public void buildFrontEndResponseFromCensusResponseTestTwo() {
+        buildInputForTestTwo();
+        Map<String, String> expected = new HashMap<>();
+        expected.put("state", "DELAWARE");
+        expected.put("whiteMale29", "3635");
+        expected.put("whiteFemale29", "3766");
+
+        Map<String, String> actual = censusResponse.getFrontEndResponse();
+
+        assertEquals("I expect the Map returned from getFrontEndResponse() to be equal to expected",
+                expected, actual);
+    }
+
+    private void buildInputForTestTwo() {
+        header = new ArrayNode(factory);
+        header.add("PCT012A032");
+        header.add("PCT012A136");
+        header.add("state");
+        body = new ArrayNode(factory);
+        body.add("3635");
+        body.add("3766");
+        body.add("10");
+        children = new ArrayList<>();
+        children.add(header);
+        children.add(body);
+        input = new ArrayNode(factory, children);
+        censusResponse.setResponse(input);
     }
 }

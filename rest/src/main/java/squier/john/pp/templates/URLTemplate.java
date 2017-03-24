@@ -28,7 +28,7 @@ public class URLTemplate {
         StringBuilder sb = new StringBuilder();
         sb.append(URL);
         for ( int i = 0; i < options.length; i++ ) {
-            sb.append(getOptionFromReadableOption(options));
+            sb.append(getOptionFromReadableOption(options[i]));
             if ( i != options.length-1 ) {
                 sb.append(",");
             }
@@ -37,14 +37,12 @@ public class URLTemplate {
         return sb.toString();
     }
 
-    private String getOptionFromReadableOption(String[] options) {
-        for (String s : options) {
+    private String getOptionFromReadableOption(String option) {
             for ( Map.Entry<String, String> e : optionsMap.getAvailableOptions().entrySet() ) {
-                if (e.getValue().equals(s)) {
+                if (e.getValue().equals(option)) {
                     return e.getKey();
                 }
             }
-        }
         return "KEY NOT FOUND";
     }
 }
