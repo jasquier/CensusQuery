@@ -1,9 +1,10 @@
-package squier.john.pp.template;
+package squier.john.pp.templates;
 
 import org.springframework.context.annotation.Configuration;
+import squier.john.pp.model.Options;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author John A. Squier
@@ -16,19 +17,18 @@ public class URLTemplate {
 
     private final String key = "b315c1e1cc2b89d6770000ab9d29c68f45162522";
     private String URL = "http://api.census.gov/data/2010/sf1?key=" + key + "&get=";
-    private String stateDE = "&for=state:08";
-    private Map<String, String> optionsMap;
+    private String stateDE = "&for=state:10";
+    private Options optionsMap;
 
     public URLTemplate() {
-        optionsMap = new HashMap<>();
-        buildOptionsMap();
+        optionsMap = new Options();
     }
 
     public String generateURL(String[] options) {
         StringBuilder sb = new StringBuilder();
         sb.append(URL);
         for ( int i = 0; i < options.length; i++ ) {
-            sb.append(optionsMap.get(options[i]));
+            sb.append(getOptionFromReadableOption(options));
             if ( i != options.length-1 ) {
                 sb.append(",");
             }
@@ -37,8 +37,14 @@ public class URLTemplate {
         return sb.toString();
     }
 
-    private void buildOptionsMap() {
-        optionsMap.put("whiteMale29", "PCT012A032");
-        optionsMap.put("whiteFemale29", "PCT012A136");
+    private String getOptionFromReadableOption(String[] options) {
+        for (String s : options) {
+            for ( Map.Entry<String, String> e : optionsMap.getAvailableOptions().entrySet() ) {
+                if (e.getValue().equals(s)) {
+                    return e.getKey();
+                }
+            }
+        }
+        return "KEY NOT FOUND";
     }
 }

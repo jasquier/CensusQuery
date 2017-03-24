@@ -1,0 +1,71 @@
+package squier.john.pp.model;
+
+/**
+ * @author John A. Squier
+ * @date 3/24/17.
+ *
+ * Enum to hold states in alphabetical order so that they can be referenced by number, the numbers assigned by
+ * the census api skip various numbers.
+ */
+public enum USStates {
+
+    BLANK_PH_FOR_0,
+    ALABAMA,
+    ALASKA,
+    BLANK_PH_FOR_3,
+    ARIZONA,
+    ARKANSAS,
+    CALIFORNIA,
+    BLANK_PH_FOR_7,
+    COLORADO,
+    CONNECTICUT,
+    DELAWARE,
+    DISTRICT_OF_COLUMBIA,
+    FLORIDA,
+    GEORGIA,
+    BLANK_PH_FOR_14,
+    HAWAII,
+    IDAHO,
+    ILLINOIS,
+    INDIANA,
+    IOWA,
+    KANSAS,
+    KENTUCKY,
+    LOUISIANA,
+    MAINE,
+    MARYLAND,
+    MASSACHUSETTS,
+    MICHIGAN,
+    MINNESOTA,
+    MISSISSIPPI,
+    MISSOURI,
+    MONTANA,
+    NEBRASKA,
+    NEVADA,
+    NEW_HAMPSHIRE,
+    NEW_JERSEY,
+    NEW_MEXICO,
+    NEW_YORK,
+    NORTH_CAROLINA,
+    NORTH_DAKOTA,
+    OHIO,
+    OKLAHOMA,
+    OREGON,
+    PENNSYLVANIA,
+    BLANK_PH_FOR_43,
+    RHODE_ISLAND,
+    SOUTH_CAROLINA,
+    SOUTH_DAKOTA,
+    TENNESSEE,
+    TEXAS,
+    UTAH,
+    VERMONT,
+    VIRGINA,
+    BLANK_PH_FOR_52,
+    WASHINGTON,
+    WEST_VIRGINIA,
+    WISCONSIN,
+    WYOMING,
+    BLANK_PH_FOR_57,
+    PUERTO_RICO // needs to be 72
+}
