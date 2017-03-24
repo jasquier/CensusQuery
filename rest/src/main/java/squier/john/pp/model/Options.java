@@ -9,9 +9,10 @@ import java.util.Map;
  * @author John A. Squier
  * @date 3/24/17.
  *
- * Class to store the various options allowed in census api requests
+ * Class to store the various filthy optionses allowed in census api requests
  *
  * TODO decide if this class should extend Map and not contain a field of type Map.
+ * TODO add more options
  */
 @Configuration
 public class Options {

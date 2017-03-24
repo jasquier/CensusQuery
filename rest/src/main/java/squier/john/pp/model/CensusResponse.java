@@ -11,7 +11,7 @@ import java.util.Map;
  * @author John A. Squier
  * @date 3/23/17.
  *
- * Class to hold the response from a census api call
+ * Class to hold and convert the response from a census api call
  */
 @Configuration
 public class CensusResponse {

@@ -67,5 +67,19 @@ public enum USStates {
     WISCONSIN,
     WYOMING,
     BLANK_PH_FOR_57,
-    PUERTO_RICO // needs to be 72
+    BLANK_PH_FOR_58,
+    BLANK_PH_FOR_59,
+    BLANK_PH_FOR_60,
+    BLANK_PH_FOR_61,
+    BLANK_PH_FOR_62,
+    BLANK_PH_FOR_63,
+    BLANK_PH_FOR_64,
+    BLANK_PH_FOR_65,
+    BLANK_PH_FOR_66,
+    BLANK_PH_FOR_67,
+    BLANK_PH_FOR_68,
+    BLANK_PH_FOR_69,
+    BLANK_PH_FOR_70,
+    BLANK_PH_FOR_71,
+    PUERTO_RICO
 }

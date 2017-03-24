@@ -16,21 +16,23 @@ import java.util.Map;
  * @date 3/23/17.
  *
  * Creates and returns URL's for the census api.
+ *
+ * TODO add handling for the US State input from the front end HTTP GET request
  */
 @Configuration
 public class URLTemplate {
 
     private final String key = readApiKeyFromFile();
-    private String URL = "http://api.census.gov/data/2010/sf1?key=" + key + "&get=";
+    private String baseURL = "http://api.census.gov/data/2010/sf1?key=" + key + "&get=";
     private String stateDE = "&for=state:10";
     private Options optionsMap;
     public URLTemplate() {
         optionsMap = new Options();
     }
 
-    public String generateURL(String[] options) {
+    public String generateURL(String[] options, String state) {
         StringBuilder sb = new StringBuilder();
-        sb.append(URL);
+        sb.append(baseURL);
         for ( int i = 0; i < options.length; i++ ) {
             sb.append(getOptionFromReadableOption(options[i]));
             if ( i != options.length-1 ) {

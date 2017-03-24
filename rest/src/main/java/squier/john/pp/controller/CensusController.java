@@ -1,6 +1,5 @@
 package squier.john.pp.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,18 +13,15 @@ import org.springframework.web.client.RestTemplate;
 import squier.john.pp.model.CensusResponse;
 import squier.john.pp.templates.URLTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author John A. Squier
  * @date 3/23/17.
- *
- * TODO create an options class that can be de-serialized from front end data
  */
 @RestController
 @Configuration
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v2")
 public class CensusController {
 
     private RestTemplate restTemplate;
@@ -38,9 +34,9 @@ public class CensusController {
         this.censusResponse = censusResponse;
     }
 
-    @RequestMapping(value = "query/{options}", method = RequestMethod.GET)
-    public Map getWithOptions(@PathVariable String[] options) {
-        ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options), HttpMethod.GET, null,
+    @RequestMapping(value = "query/options={options}&state={state}", method = RequestMethod.GET)
+    public Map getCensusData(@PathVariable String[] options, @PathVariable String state) {
+        ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options, state), HttpMethod.GET, null,
                 new ParameterizedTypeReference<ArrayNode>() {});
 
         censusResponse.setResponse(response.getBody());
