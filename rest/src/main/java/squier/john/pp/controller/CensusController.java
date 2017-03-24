@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import squier.john.pp.model.CensusResponse;
 import squier.john.pp.templates.URLTemplate;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -36,24 +38,8 @@ public class CensusController {
         this.censusResponse = censusResponse;
     }
 
-    @RequestMapping(value = "wm29de", method = RequestMethod.GET)
-    public Map getWM29DE() {
-        String[] options = {"whiteMale29"};
-
-        ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options), HttpMethod.GET, null,
-                new ParameterizedTypeReference<ArrayNode>(){});
-
-        System.out.println("BODY");//////////////////////////////////////////////////////////////////////
-        System.out.println(response.getBody());//////////////////////////////////////////////////////////////////////
-
-        censusResponse.setResponse(response.getBody());
-        return censusResponse.getFrontEndResponse();
-    }
-
-    @RequestMapping(value = "wmwf29de", method = RequestMethod.GET)
-    public Map getWMWF29DE() {
-        String[] options = {"whiteMale29", "whiteFemale29"};
-
+    @RequestMapping(value = "query/{options}", method = RequestMethod.GET)
+    public Map getWithOptions(@PathVariable String[] options) {
         ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options), HttpMethod.GET, null,
                 new ParameterizedTypeReference<ArrayNode>() {});
 
