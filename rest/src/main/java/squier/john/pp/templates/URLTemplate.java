@@ -3,8 +3,13 @@ package squier.john.pp.templates;
 import org.springframework.context.annotation.Configuration;
 import squier.john.pp.model.Options;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author John A. Squier
@@ -15,11 +20,10 @@ import java.util.Set;
 @Configuration
 public class URLTemplate {
 
-    private final String key = "b315c1e1cc2b89d6770000ab9d29c68f45162522";
+    private final String key = readApiKeyFromFile();
     private String URL = "http://api.census.gov/data/2010/sf1?key=" + key + "&get=";
     private String stateDE = "&for=state:10";
     private Options optionsMap;
-
     public URLTemplate() {
         optionsMap = new Options();
     }
@@ -44,5 +48,17 @@ public class URLTemplate {
                 }
             }
         return "KEY NOT FOUND";
+    }
+
+    private String readApiKeyFromFile() {
+        Charset charset = Charset.forName("US-ASCII");
+        Path path = Paths.get("src", "main", "resources", "static", "apiKey");
+        String line = null;
+        try (BufferedReader reader = Files.newBufferedReader(path, charset) ) {
+            line = reader.readLine();
+        } catch ( IOException e ) {
+            System.err.format("IOException: %s%n", e);
+        }
+        return line;
     }
 }
