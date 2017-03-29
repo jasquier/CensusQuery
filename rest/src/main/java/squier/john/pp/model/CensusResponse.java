@@ -26,18 +26,18 @@ public class CensusResponse {
         this.options = options;
     }
 
-    public ArrayNode getResponse() {
+    ArrayNode getResponse() {
         return response;
-    }
-
-    public Map<String, String> getFrontEndResponse() {
-        buildFrontEndResponseFromCensusResponse();
-        return frontEndResponse;
     }
 
     public void setResponse(ArrayNode response) {
         this.response = response;
         frontEndResponse = new HashMap<>(); // clear the map
+    }
+
+    public Map<String, String> getFrontEndResponse() {
+        buildFrontEndResponseFromCensusResponse();
+        return frontEndResponse;
     }
 
     private void buildFrontEndResponseFromCensusResponse() {

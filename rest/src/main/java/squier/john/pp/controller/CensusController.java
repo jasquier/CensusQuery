@@ -34,7 +34,7 @@ public class CensusController {
         this.censusResponse = censusResponse;
     }
 
-    @RequestMapping(value = "query/options={options}&state={state}", method = RequestMethod.GET)
+    @RequestMapping(value = "/query/options={options}&state={state}", method = RequestMethod.GET)
     public Map getCensusData(@PathVariable String[] options, @PathVariable String state) {
         ResponseEntity<ArrayNode> response = restTemplate.exchange(urlTemplate.generateURL(options, state), HttpMethod.GET, null,
                 new ParameterizedTypeReference<ArrayNode>() {});

@@ -2,6 +2,7 @@ package squier.john.pp.templates;
 
 import org.springframework.context.annotation.Configuration;
 import squier.john.pp.model.Options;
+import squier.john.pp.model.USStates;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,16 +17,16 @@ import java.util.Map;
  * @date 3/23/17.
  *
  * Creates and returns URL's for the census api.
- *
- * TODO add handling for the US State input from the front end HTTP GET request
  */
 @Configuration
 public class URLTemplate {
 
     private final String key = readApiKeyFromFile();
     private String baseURL = "http://api.census.gov/data/2010/sf1?key=" + key + "&get=";
-    private String stateDE = "&for=state:10";
+    private String stateBaseURL = "&for=state:";
     private Options optionsMap;
+
+    // change to dependency injection for optionsMap
     public URLTemplate() {
         optionsMap = new Options();
     }
@@ -39,7 +40,8 @@ public class URLTemplate {
                 sb.append(",");
             }
         }
-        sb.append(stateDE);
+        sb.append(this.stateBaseURL);
+        sb.append(USStates.valueOf(state).ordinal());
         return sb.toString();
     }
 
